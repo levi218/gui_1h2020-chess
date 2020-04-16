@@ -31,26 +31,26 @@ void ChessPiece::paint(QPainter *painter,
         if(this->image.isNull()){
             // draw place holder if there are no image
             if(this->side == Side::black){
-                painter->fillRect(-0.25f*SIZE,-0.25f*SIZE,SIZE/2,SIZE/2,Qt::black);
+                painter->fillRect(-0.25f*SIZE+10,-0.25f*SIZE,SIZE/2,SIZE/2,Qt::black);
             }
             else{
-                painter->fillRect(-0.25f*SIZE,-0.25f*SIZE,SIZE/2,SIZE/2,Qt::white);
+                painter->fillRect(-0.25f*SIZE+10,-0.25f*SIZE,SIZE/2,SIZE/2,Qt::white);
             }
         }else{
             // draw image
-            painter->drawPixmap(-0.5f*SIZE,-0.5f*SIZE,SIZE,SIZE,this->image);
+            painter->drawPixmap(-0.5f*SIZE+10,-0.5f*SIZE,SIZE,SIZE,this->image);
 
         }
         painter->restore();
         if(this->isSelected){
             // draw place where we can move to
             for(QPoint cell : getMoveList()){
-                 painter->fillRect(cell.x()*SIZE,cell.y()*SIZE,SIZE,SIZE, QColor(255,0,0,100));
+                 painter->fillRect(cell.x()*SIZE+10,cell.y()*SIZE,SIZE,SIZE, QColor(255,0,0,100));
             }
 
             // draw green border around selected piece
             painter->setPen(QPen(Qt::green, 3));
-            painter->drawRect(board_x*SIZE,board_y*SIZE,SIZE,SIZE);
+            painter->drawRect(board_x*SIZE+10,board_y*SIZE,SIZE,SIZE);
         }
         // draw boundingRect for testing
         painter->setPen(QPen(Qt::red, 1));
@@ -71,9 +71,9 @@ QList<QPoint> ChessPiece::getMoveList(){
 
 QRectF ChessPiece::boundingRect() const{
     if(this->isSelected){
-        return QRectF(0,0,8*SIZE,8*SIZE);
+        return QRectF(0,0,8*SIZE+10,8*SIZE);
     }else{
-        return QRectF(board_x*SIZE,board_y*SIZE,SIZE,SIZE);
+        return QRectF(board_x*SIZE+10,board_y*SIZE,SIZE,SIZE);
     }
 }
 void ChessPiece::moveTo(QPoint dest){
