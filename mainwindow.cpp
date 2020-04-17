@@ -88,6 +88,13 @@ void MainWindow::nextTurn(Move *move){
         ui->tblHistory->setRowCount(gameManager->turnNumber);
         ui->tblHistory->setItem(gameManager->turnNumber-1,0,new QTableWidgetItem(move->source->name + QChar::fromLatin1(move->destination.x()+'a')+QString::number(move->destination.y())));
     }
+
+    if(gameManager->isCheckmated(gameManager->currentSide)){
+        QMessageBox::information(this, tr("Game Over"),
+                              tr("%1 won the game")
+                              .arg(gameManager->currentSide==white?"White ":"Black "));
+
+    }
     // rotate board if needed
     if(gameManager->mySide==white){
         QTransform t;

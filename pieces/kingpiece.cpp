@@ -1,4 +1,5 @@
 #include "chesspiece.h"
+#include <QPainter>
 #include "kingpiece.h"
 KingPiece::KingPiece(QObject *parent,int board_x, int board_y, Side side)
     : ChessPiece(parent,board_x,board_y,side)
@@ -8,6 +9,15 @@ KingPiece::KingPiece(QObject *parent,int board_x, int board_y, Side side)
         this->image = QPixmap(":/images/b_king_png_128px.png");
     }else{
         this->image = QPixmap(":/images/w_king_png_128px.png");
+    }
+}
+void KingPiece::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
+    ChessPiece::paint(painter,option,widget);
+    if(inCheck()){
+        painter->save();
+        painter->translate(((float)board_x+0.5f)*SIZE+10,((float)board_y+0.5f)*SIZE);
+        painter->fillRect(-0.5f*SIZE,-0.5f*SIZE,SIZE,SIZE,QColor(255,0,0,100));
+        painter->restore();
     }
 }
 
@@ -33,7 +43,7 @@ QList<QPoint> KingPiece::getMoveList(){
     if(!isMoved){
         // check queen-side rook
         ChessPiece *rook = getGameManager()->getPieceAt(QPoint(0,board_y));
-        if(!rook->isMoved
+        if(rook&&!rook->isMoved
                 &&!getGameManager()->getPieceAt(QPoint(1,board_y))
                 &&!getGameManager()->getPieceAt(QPoint(2,board_y))
                 &&!getGameManager()->getPieceAt(QPoint(3,board_y))){
@@ -41,7 +51,7 @@ QList<QPoint> KingPiece::getMoveList(){
         }
         // check king-side rook
         rook = getGameManager()->getPieceAt(QPoint(7,board_y));
-        if(!rook->isMoved
+        if(rook&&!rook->isMoved
                 &&!getGameManager()->getPieceAt(QPoint(6,board_y))
                 &&!getGameManager()->getPieceAt(QPoint(5,board_y))){
             result.push_back(QPoint(6,board_y));

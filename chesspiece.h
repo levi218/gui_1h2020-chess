@@ -23,13 +23,13 @@ public:
     virtual QList<QPoint> getMoveList();
     QPixmap image;
     void moveTo(QPoint dest);
+    int SIZE = 64;
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     GameManager* getGameManager();
-private:
-    int SIZE = 64;
-    virtual QRectF boundingRect() const;
     virtual void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *);
+private:
+    virtual QRectF boundingRect() const;
 signals:
     void requestMove(ChessPiece* piece, QPoint prev, QPoint cur);
 public slots:

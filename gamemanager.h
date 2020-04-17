@@ -9,6 +9,7 @@
 
 class ChessPiece;
 class Move;
+
 class GameManager : public QGraphicsScene
 {
     Q_OBJECT
@@ -24,7 +25,7 @@ public:
     ChessPiece *whiteKing;
     ChessPiece *blackKing;
     void promote(QPoint origin, QPoint destination, int type);
-    void isCheckmated(Side side);
+    bool isCheckmated(Side side);
 protected:
     QList<ChessPiece *> pieces;
 signals:

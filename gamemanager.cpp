@@ -17,7 +17,7 @@ GameManager::GameManager(QObject *parent) : QGraphicsScene(parent)
 }
 void GameManager::newMatch(){
     clear();
-    this->addItem(new Board());
+    this->addItem(new Board(this));
         // init black pieces;
 //    this->addItem(new RookPiece(this,0,0,Side::black)); // rook
 //    this->addItem(new KnightPiece(this,1,0,Side::black)); // knight
@@ -82,13 +82,13 @@ void GameManager::newMatch(){
 
 }
 
-void GameManager::isCheckmated(Side side){
+bool GameManager::isCheckmated(Side side){
     KingPiece *king = side==white?(KingPiece *)whiteKing:(KingPiece *)blackKing;
 
     if(!king->inCheck()){
         // not checkmate
         qDebug() << "Not checkmated";
-        return;
+        return false;
     }
     //    //therefore if we get here on out, we are currently in check...
 
@@ -102,9 +102,9 @@ void GameManager::isCheckmated(Side side){
                     m.commit();
                     if(!king->inCheck()){
                         // can get out of checkmate
-                        qDebug() << "Cant get out of checkmate";
+                        qDebug() << "Can get out of checkmate";
                         m.revert();
-                        return;
+                        return false;
                     }
                     m.revert();
                 }
@@ -113,8 +113,8 @@ void GameManager::isCheckmated(Side side){
         }
     }
     // cant get out of checkmate
-    qDebug() << "Can get out of checkmate";
-    return;
+    qDebug() << "Cant get out of checkmate";
+    return true;
 
 }
 
