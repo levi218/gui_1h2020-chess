@@ -37,7 +37,6 @@ private slots:
     void onPieceMoved(Move *move);
 //    void onCastling(ChessPiece* piece, bool isKingSide);
     void onPromotion(QPoint origin, QPoint destination);
-    void on_btnCHeck_clicked();
     void on_btnCheck_clicked();
 };
 

@@ -10,6 +10,12 @@
 #include <QtNetwork>
 #include <QMessageBox>
 #include "promotion.h"
+#include <QString>
+
+int rows = 0, cols = 2;
+QString gameHistory;
+
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -18,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
     gameManager = new GameManager();
 
     ui->graphicsView->setScene(gameManager);
-    QStringList headers = { "White", "Black" };
+    QStringList headers = { "White", "Black" };    
     ui->tblHistory->setHorizontalHeaderLabels(headers);
     connect(gameManager,&GameManager::pieceMoved, this, &MainWindow::onPieceMoved);
     connect(gameManager,&GameManager::pawnReachFinalRow, this, &MainWindow::onPromotion);
@@ -72,13 +78,68 @@ void MainWindow::onPromotion(QPoint origin, QPoint destination){
     gameManager->promote(origin, destination,type);
 }
 void MainWindow::nextTurn(Move *move){
+    QString newPosition;
+
+    if(move->source->name != "P"){
+        newPosition = move->source->name;
+        if(move->target!=nullptr){//attack
+            newPosition += 'x' +QChar::fromLatin1(move->destination.x()+'a')+QString::number(move->destination.y()+1);
+        }
+        else{
+            newPosition += QChar::fromLatin1(move->destination.x()+'a')+QString::number(move->destination.y()+1);
+        }
+    }
+    else{
+        if(move->target!=nullptr){
+            newPosition = QChar::fromLatin1(move->origin.x()+'a')+'x' +QChar::fromLatin1(move->destination.x()+'a')+QString::number(move->destination.y()+1);
+        }
+        else{
+            newPosition = QChar::fromLatin1(move->destination.x()+'a')+QString::number(move->destination.y()+1);
+        }
+        if(move->isPromoted){
+            switch(move->option){
+            case 1:
+                newPosition += "=R";
+                break;
+            case 2:
+                newPosition += "=B";
+                break;
+            case 3:
+                newPosition += "=K";
+            case 0:
+            default:
+                newPosition += "=Q";
+                break;
+            }
+        }
+    }
+
+    if(gameManager->isCheckmated(gameManager->mySide)){
+        newPosition = newPosition + "+";
+    }
+
+    if(move->source->name=="K"&&abs(move->destination.x()-move->origin.x())==2){
+        // castling
+        if(move->destination.x()-move->origin.x()<0){
+            newPosition = "O-O";
+        }
+        else{
+            newPosition = "O-O-O";
+        }
+    }    
+
     if(gameManager->currentSide == Side::black) {
         gameManager->currentSide = Side::white;
         ui->lblTurn->setText(tr("White turn!"));
         if(!tcpSocket) gameManager->mySide = Side::white;
         ui->tblHistory->setRowCount(gameManager->turnNumber);
+
         ui->tblHistory->setItem(gameManager->turnNumber-1,1,
-                                new QTableWidgetItem(move->source->name + QChar::fromLatin1(move->destination.x()+'a')+QString::number(move->destination.y())));
+                                new QTableWidgetItem(newPosition));
+//
+//        rows = gameManager->turnNumber;
+//        gameHistory[rows][0] = move->source->name + QChar::fromLatin1(move->destination.x()+'a') + QString::number(move->destination.y()+1);
+//        qDebug() << gameHistory;
     }
     else{
         gameManager->currentSide = Side::black;
@@ -86,14 +147,15 @@ void MainWindow::nextTurn(Move *move){
         ui->lblTurn->setText(tr("Black turn!"));
         gameManager->turnNumber +=1;
         ui->tblHistory->setRowCount(gameManager->turnNumber);
-        ui->tblHistory->setItem(gameManager->turnNumber-1,0,new QTableWidgetItem(move->source->name + QChar::fromLatin1(move->destination.x()+'a')+QString::number(move->destination.y())));
+        ui->tblHistory->setItem(gameManager->turnNumber-1,0,new QTableWidgetItem(newPosition));
     }
+
 
     if(gameManager->isCheckmated(gameManager->currentSide)){
         QMessageBox::information(this, tr("Game Over"),
                               tr("%1 won the game")
-                              .arg(gameManager->currentSide==white?"White ":"Black "));
-
+                              .arg(gameManager->currentSide==black?"White ":"Black "));
+        this->close();
     }
     // rotate board if needed
     if(gameManager->mySide==white){
@@ -118,11 +180,6 @@ void MainWindow::onPieceMoved(Move *move){
 
     nextTurn(move);
     ui->graphicsView->update();
-}
-
-
-void MainWindow::on_btnCHeck_clicked()
-{
 }
 
 void MainWindow::on_btnCheck_clicked()

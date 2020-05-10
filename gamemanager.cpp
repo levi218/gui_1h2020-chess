@@ -19,54 +19,54 @@ void GameManager::newMatch(){
     clear();
     this->addItem(new Board(this));
         // init black pieces;
-//    this->addItem(new RookPiece(this,0,0,Side::black)); // rook
-//    this->addItem(new KnightPiece(this,1,0,Side::black)); // knight
-//    this->addItem(new BishopPiece(this,2,0,Side::black)); // bishop
-//    this->addItem(new QueenPiece(this,3,0,Side::black)); // queen
-//    blackKing = new KingPiece(this,4,0,Side::black);
-//    this->addItem(blackKing); // king
-//    this->addItem(new BishopPiece(this,5,0,Side::black)); // bishop
-//    this->addItem(new KnightPiece(this,6,0,Side::black)); // knight
-//    this->addItem(new RookPiece(this,7,0,Side::black)); // rook
-//    for(int i =0;i<8;i++){
-//        this->addItem(new PawnPiece(this,i,1,Side::black)); // pawns
-//    }
+    this->addItem(new RookPiece(this,0,0,Side::black)); // rook
+    this->addItem(new KnightPiece(this,1,0,Side::black)); // knight
+    this->addItem(new BishopPiece(this,2,0,Side::black)); // bishop
+    this->addItem(new QueenPiece(this,3,0,Side::black)); // queen
+    blackKing = new KingPiece(this,4,0,Side::black);
+    this->addItem(blackKing); // king
+    this->addItem(new BishopPiece(this,5,0,Side::black)); // bishop
+    this->addItem(new KnightPiece(this,6,0,Side::black)); // knight
+    this->addItem(new RookPiece(this,7,0,Side::black)); // rook
+    for(int i =0;i<8;i++){
+        this->addItem(new PawnPiece(this,i,1,Side::black)); // pawns
+    }
     //    this->addItem(new PawnPiece(this,1,6,Side::black)); // pawn for testing promotion
 
     // init white pieces;
-//    this->addItem(new RookPiece(this,0,7,Side::white)); // rook
-//    this->addItem(new KnightPiece(this,1,7,Side::white)); // knight
-//    this->addItem(new BishopPiece(this,2,7,Side::white)); // bishop
-//    this->addItem(new QueenPiece(this,3,7,Side::white)); // queen
-//    whiteKing = new KingPiece(this,4,7,Side::white);
-//    this->addItem(whiteKing); // king
-//    this->addItem(new BishopPiece(this,5,7,Side::white)); // bishop
-//    this->addItem(new KnightPiece(this,6,7,Side::white)); // knight
-//    this->addItem(new RookPiece(this,7,7,Side::white)); // rook
-//    for(int i =0;i<8;i++){
-//        this->addItem(new PawnPiece(this,i,6,Side::white)); // pawns
-//    }
+    this->addItem(new RookPiece(this,0,7,Side::white)); // rook
+    this->addItem(new KnightPiece(this,1,7,Side::white)); // knight
+    this->addItem(new BishopPiece(this,2,7,Side::white)); // bishop
+    this->addItem(new QueenPiece(this,3,7,Side::white)); // queen
+    whiteKing = new KingPiece(this,4,7,Side::white);
+    this->addItem(whiteKing); // king
+    this->addItem(new BishopPiece(this,5,7,Side::white)); // bishop
+    this->addItem(new KnightPiece(this,6,7,Side::white)); // knight
+    this->addItem(new RookPiece(this,7,7,Side::white)); // rook
+    for(int i =0;i<8;i++){
+        this->addItem(new PawnPiece(this,i,6,Side::white)); // pawns
+    }
     //    this->addItem(new PawnPiece(this,1,1,Side::white)); // pawn for testing promotion
 
     //exp1
-    this->addItem(new BishopPiece(this,4,0,Side::black)); // bishop
-    blackKing = new KingPiece(this,2,0,Side::black);
-    this->addItem(blackKing); // king
-    this->addItem(new BishopPiece(this,1,4,Side::black)); // bishop
-    for(int i =0;i<3;i++){
-        this->addItem(new PawnPiece(this,i,1,Side::black)); // pawns
-    }
+//    this->addItem(new BishopPiece(this,1,0,Side::black)); // bishop
+//    blackKing = new KingPiece(this,2,0,Side::black);
+//    this->addItem(blackKing); // king
+//    this->addItem(new BishopPiece(this,1,4,Side::black)); // bishop
+//    for(int i =0;i<3;i++){
+//        this->addItem(new PawnPiece(this,i,1,Side::black)); // pawns
+//    }
 
-    // init white pieces;
-    this->addItem(new RookPiece(this,0,7,Side::white)); // rook
-    this->addItem(new BishopPiece(this,5,3,Side::white)); // bishop
-    whiteKing = new KingPiece(this,4,7,Side::white);
-    this->addItem(whiteKing); // king
-    this->addItem(new PawnPiece(this,7,6,Side::white)); // pawns
-    this->addItem(new PawnPiece(this,5,6,Side::white)); // pawns
-    this->addItem(new PawnPiece(this,6,5,Side::white)); // pawns
+//    // init white pieces;
+//    this->addItem(new RookPiece(this,3,7,Side::white)); // rook
+//    this->addItem(new BishopPiece(this,5,3,Side::white)); // bishop
+//    whiteKing = new KingPiece(this,4,7,Side::white);
+//    this->addItem(whiteKing); // king
+//    this->addItem(new PawnPiece(this,7,6,Side::white)); // pawns
+//    this->addItem(new PawnPiece(this,5,6,Side::white)); // pawns
+//    this->addItem(new PawnPiece(this,6,5,Side::white)); // pawns
 
-    //exp2
+//    exp2
 //    blackKing = new KingPiece(this,6,5,Side::black);
 //    this->addItem(blackKing); // king
 //    this->addItem(new RookPiece(this,0,7,Side::black)); // rook
@@ -133,6 +133,7 @@ ChessPiece* GameManager::getPieceAt(QPoint pos){
         if(dynamic_cast<ChessPiece*>(p)!=nullptr){
             if(pos.x() == ((ChessPiece*)p)->board_x
                     && pos.y() == ((ChessPiece*)p)->board_y){
+
                 return ((ChessPiece*)p);
             }
         }

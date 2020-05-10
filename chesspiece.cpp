@@ -24,33 +24,34 @@ void ChessPiece::paint(QPainter *painter,
 {
     if(isAlive){
         painter->save();
-        painter->translate(((float)board_x+0.5f)*SIZE,((float)board_y+0.5f)*SIZE);
+        painter->translate(((float)board_x+0.5f)*SIZE+OFFSET,((float)board_y+0.5f)*SIZE+OFFSET);
         if(getGameManager()->mySide==black){
             painter->rotate(180);
         }
+
         if(this->image.isNull()){
             // draw place holder if there are no image
             if(this->side == Side::black){
-                painter->fillRect(-0.25f*SIZE+10,-0.25f*SIZE,SIZE/2,SIZE/2,Qt::black);
+                painter->fillRect(-0.25f*SIZE+OFFSET,-0.25f*SIZE+OFFSET,SIZE/2,SIZE/2,Qt::black);
             }
             else{
-                painter->fillRect(-0.25f*SIZE+10,-0.25f*SIZE,SIZE/2,SIZE/2,Qt::white);
+                painter->fillRect(-0.25f*SIZE+OFFSET,-0.25f*SIZE+OFFSET,SIZE/2,SIZE/2,Qt::white);
             }
-        }else{
+        }else{   
             // draw image
-            painter->drawPixmap(-0.5f*SIZE+10,-0.5f*SIZE,SIZE,SIZE,this->image);
-
+             painter->drawPixmap(-0.5f*SIZE,-0.5f*SIZE,SIZE,SIZE,this->image);
         }
         painter->restore();
+
         if(this->isSelected){
             // draw place where we can move to
             for(QPoint cell : getMoveList()){
-                 painter->fillRect(cell.x()*SIZE+10,cell.y()*SIZE,SIZE,SIZE, QColor(255,0,0,100));
+                 painter->fillRect(cell.x()*SIZE+OFFSET,cell.y()*SIZE+OFFSET,SIZE,SIZE, QColor(255,0,0,100));
             }
 
             // draw green border around selected piece
             painter->setPen(QPen(Qt::green, 3));
-            painter->drawRect(board_x*SIZE+10,board_y*SIZE,SIZE,SIZE);
+            painter->drawRect(board_x*SIZE+OFFSET,board_y*SIZE+OFFSET,SIZE,SIZE);
         }
         // draw boundingRect for testing
         painter->setPen(QPen(Qt::red, 1));
@@ -71,9 +72,9 @@ QList<QPoint> ChessPiece::getMoveList(){
 
 QRectF ChessPiece::boundingRect() const{
     if(this->isSelected){
-        return QRectF(0,0,8*SIZE+10,8*SIZE);
+        return QRectF(OFFSET,OFFSET,8*SIZE+OFFSET,8*SIZE+OFFSET);
     }else{
-        return QRectF(board_x*SIZE+10,board_y*SIZE,SIZE,SIZE);
+        return QRectF(board_x*SIZE+OFFSET,board_y*SIZE+OFFSET,SIZE,SIZE);
     }
 }
 void ChessPiece::moveTo(QPoint dest){

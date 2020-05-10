@@ -24,6 +24,7 @@ public:
     QPixmap image;
     void moveTo(QPoint dest);
     int SIZE = 64;
+    int OFFSET = 10;
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     GameManager* getGameManager();
