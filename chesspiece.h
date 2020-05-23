@@ -11,6 +11,7 @@ class GameManager;
 class ChessPiece : public QObject, public QGraphicsItem
 {
     Q_OBJECT
+    Q_INTERFACES(QGraphicsItem)
 public:
     explicit ChessPiece(QObject *parent = 0,int board_x=0, int board_y=0, Side side=Side::black);
     QString name;

@@ -19,8 +19,8 @@ GameManager* ChessPiece::getGameManager(){
 }
 
 void ChessPiece::paint(QPainter *painter,
-                       const QStyleOptionGraphicsItem *option,
-                       QWidget *widget)
+                       const QStyleOptionGraphicsItem *,
+                       QWidget *)
 {
     if(isAlive){
         painter->save();

@@ -87,7 +87,7 @@ bool GameManager::isCheckmated(Side side){
 
     if(!king->inCheck()){
         // not checkmate
-        qDebug() << "Not checkmated";
+//        qDebug() << "Not checkmated";
         return false;
     }
     //    //therefore if we get here on out, we are currently in check...

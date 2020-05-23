@@ -8,7 +8,7 @@ Board::Board(QObject *parent) : QObject(parent), QGraphicsItem()
 {
     this->setZValue(-1);
 }
-void Board::mousePressEvent(QGraphicsSceneMouseEvent *event){
+void Board::mousePressEvent(QGraphicsSceneMouseEvent *){
     qDebug()<< "board clicked";
 }
 GameManager* Board::getGameManager(){
@@ -16,8 +16,8 @@ GameManager* Board::getGameManager(){
 }
 
 void Board::paint(QPainter *painter,
-                          const QStyleOptionGraphicsItem *option,
-                          QWidget *widget)
+                          const QStyleOptionGraphicsItem *,
+                          QWidget *)
 {
     for(int i=0;i<8;i++){
         for(int j=0;j<8;j++){

@@ -22,7 +22,6 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     gameManager = new GameManager();
-
     ui->graphicsView->setScene(gameManager);
     QStringList headers = { "White", "Black" };    
     ui->tblHistory->setHorizontalHeaderLabels(headers);
@@ -42,7 +41,7 @@ MainWindow::MainWindow(QWidget *parent, QTcpSocket* socket, Side side): MainWind
 
 MainWindow::~MainWindow()
 {
-    qDebug()<<"destroying window";
+//    qDebug()<<"destroying window";
     delete ui;
 }
 
@@ -64,7 +63,7 @@ void MainWindow::onIncomingPacket(){
 //    gameManager->update();
 //    ui->graphicsView->viewport()->repaint();
 }
-void MainWindow::closeEvent(QCloseEvent *event){
+void MainWindow::closeEvent(QCloseEvent *){
     emit windowClosed();
 }
 
@@ -180,11 +179,4 @@ void MainWindow::onPieceMoved(Move *move){
 
     nextTurn(move);
     ui->graphicsView->update();
-}
-
-void MainWindow::on_btnCheck_clicked()
-{
-    gameManager->isCheckmated(white);
-    gameManager->isCheckmated(black);
-
 }

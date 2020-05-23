@@ -12,7 +12,7 @@ Move::Move(GameManager *manager)
 }
 
 Move::Move(GameManager *manager, QPoint origin, QPoint destination, int option)
-    : manager(manager), origin(origin), destination(destination), option(option), isPromoted(false){
+    : manager(manager), origin(origin), destination(destination), isPromoted(false), option(option){
 }
 
 void Move::commit(){

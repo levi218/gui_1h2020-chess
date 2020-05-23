@@ -48,7 +48,7 @@ void LocalMultiplayer::on_btnHost_clicked()
     }
 }
 void LocalMultiplayer::stopListenning(){
-    qDebug() << "stopped listenning";
+//    qDebug() << "stopped listenning";
     if(tcpServer){
         if(tcpServer->isListening()){
              tcpServer->close();
@@ -60,10 +60,10 @@ void LocalMultiplayer::stopListenning(){
     ui->btnHost->setText("Host");
     statusBar()->showMessage("Disconnected");
 
-    qDebug() << "finished listenning";
+//    qDebug() << "finished listenning";
 }
 void LocalMultiplayer::onClientDisconnected(){
-    qDebug() << "client disconnected";
+//    qDebug() << "client disconnected";
     if(currentGame){
         delete currentGame;
         currentGame = nullptr;
@@ -72,7 +72,7 @@ void LocalMultiplayer::onClientDisconnected(){
     if(tcpServer){
         stopListenning();
     }
-    qDebug() << "finished disconnect";
+//    qDebug() << "finished disconnect";
 }
 
 void LocalMultiplayer::onClientConnected(){
@@ -97,7 +97,7 @@ void LocalMultiplayer::onConnectedToServer(){
 }
 
 void LocalMultiplayer::onClientGameClosed(){
-    qDebug() << "onclientClosed";
+//    qDebug() << "onclientClosed";
     if(currentGame){
         delete currentGame;
         currentGame = nullptr;
@@ -107,7 +107,7 @@ void LocalMultiplayer::onClientGameClosed(){
     }
     statusBar()->showMessage("Disconnected");
     show();
-    qDebug() << "finished onclientClosed";
+//    qDebug() << "finished onclientClosed";
 }
 
 void LocalMultiplayer::on_btnJoin_clicked()

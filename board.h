@@ -9,6 +9,7 @@ class GameManager;
 class Board : public QObject, public QGraphicsItem
 {
     Q_OBJECT
+    Q_INTERFACES(QGraphicsItem)
 public:
     explicit Board(QObject *parent = 0);
 private:
