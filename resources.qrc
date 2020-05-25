@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/">
+        <file>board.png</file>
+        <file>images/b_bishop_png_128px.png</file>
+        <file>images/b_king_png_128px.png</file>
+        <file>images/b_knight_png_128px.png</file>
+        <file>images/b_pawn_png_128px.png</file>
+        <file>images/b_queen_png_128px.png</file>
+        <file>images/b_rook_png_128px.png</file>
+        <file>images/w_bishop_png_128px.png</file>
+        <file>images/w_king_png_128px.png</file>
+        <file>images/w_knight_png_128px.png</file>
+        <file>images/w_pawn_png_128px.png</file>
+        <file>images/w_queen_png_128px.png</file>
+        <file>images/w_rook_png_128px.png</file>
+    </qresource>
+</RCC>
