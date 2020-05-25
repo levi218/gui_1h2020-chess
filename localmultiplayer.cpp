@@ -128,6 +128,9 @@ void LocalMultiplayer::on_btnPlayLocal_clicked()
     if(tcpServer){
         stopListenning();
     }
+    if(tcpSocket!=nullptr){
+        tcpSocket=nullptr;
+    }
     currentGame = new MainWindow(nullptr);
     connect(currentGame,&MainWindow::windowClosed,this,&LocalMultiplayer::onClientGameClosed);
     currentGame->show();
